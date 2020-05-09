@@ -1,6 +1,7 @@
 #pragma once
 
 #include "graph.hpp"
+#include <iostream>
 
 std::vector<std::string> split(std::string data, const char c) {
     std::vector<std::string> returnData;
@@ -62,7 +63,7 @@ public:
         readingState = FileLines::D_DESTINATION;
     }
 
-    void parse() {
+    Graph parse() {
         Graph graph;
 
         if (file.is_open()) {
@@ -75,8 +76,6 @@ public:
                         line = line.substr(3);
                         int destination = std::stoi(line);
                         graph.setDestination(destination);
-
-//                        std::cout << "destination: " << destination << std::endl;
 
                         readingState = FileLines::S_COLLECTION;
                     } else {
@@ -92,7 +91,6 @@ public:
                         for(auto d: ddd) {
                             graph.addStartPoint(std::stoi(d));
                         }
-//                        std::cout << "Start: " << line << std::endl;
                         readingState = FileLines::EDGE;
                     } else {
                         readingState = FileLines::ERROR;
@@ -102,7 +100,12 @@ public:
                     graph.addEdge(Edge(std::stoi(ddd.at(0)), std::stoi(ddd.at(1))));
                 }
             }
+
+            graph.parseNodes();
+
         }
+
+        return graph;
     }
 
     ~FileParser () {

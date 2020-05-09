@@ -12,4 +12,8 @@ public:
     void addFriend(int friendIndex) {
         friends.push_back(friendIndex);
     }
+
+    int getIndex() {
+        return indexNumber;
+    }
 };

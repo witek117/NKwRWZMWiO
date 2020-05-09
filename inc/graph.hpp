@@ -11,7 +11,7 @@ class Graph {
 
     std::vector<Node> nodes;
 
-    std::vector<Edge> edges;
+    Edges edges;
 public:
     Graph() {
 
@@ -34,7 +34,12 @@ public:
 //    }
 
     void addEdge(Edge edge) {
-        edges.push_back(edge);
+        edges.addEdge(edge);
+    }
+
+    void parseNodes() {
+        nodes = edges.getNodes();
+//        edges.getNodes();
     }
 
 };

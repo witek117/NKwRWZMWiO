@@ -1,19 +1,17 @@
-#include <iostream>
+//#include <iostream>
 #include <dirent.h>
 #include <fstream>
 #include "fileParser.hpp"
 
 static std::string testName = "test1.txt";
 
-
-
-
-
 int main() {
     FileParser fileParser(testName);
-    fileParser.parse();
+    Graph graph = fileParser.parse();
 
+    while (true) {
 
+    }
 
 //    std::ifstream file;
 
