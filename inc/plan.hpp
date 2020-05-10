@@ -17,4 +17,8 @@ public:
     int getDestination() {
         return destinationIndex;
     }
+
+    std::vector<int> getStartPoints() {
+        return S_COLLECTION;
+    }
 };

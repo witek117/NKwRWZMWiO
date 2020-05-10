@@ -12,25 +12,34 @@ class Node {
         }
         return false;
     }
-
-    int lastpathCost = -1;
+    Node* parentNode = nullptr;
+    int lastPathCost = -1;
     int indexNumber;
     uint32_t uID;
 public:
+    Node* getParentNode() {
+        return parentNode;
+    }
+
+    uint32_t getLastPathCost() {
+        return lastPathCost;
+    }
+
     void setLastPathCost(int cost ) {
-        lastpathCost = cost;
+        lastPathCost = cost;
+    }
+
+    void setPreviousNode(Node* node) {
+        parentNode = node;
     }
     std::vector<Edge> edges;
 
-    Node(int indexNumber, uint32_t uID) : indexNumber(indexNumber), uID(uID) {
-//        edges.clear();
-    }
+    Node(int indexNumber, uint32_t uID) : indexNumber(indexNumber), uID(uID) { }
 
     void addEdges(Edge edge) {
         if (!findEdge(edges, edge)) {
             edges.emplace_back(edge);
         }
-//        edges.emplace_back(edge);
     }
 
     int getIndex() {

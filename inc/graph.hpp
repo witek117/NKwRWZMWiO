@@ -6,16 +6,13 @@
 #include "edge.hpp"
 
 class Graph {
-
-
+public:
     Nodes nodes;
     Edges edges;
-public:
+
     Graph() {
 
     }
-
-
 
     void addEdge(Edge edge) {
         edges.addEdge(edge);
@@ -23,10 +20,6 @@ public:
 
     void parseNodes() {
         nodes.parseEdges(edges);
-    }
-
-    void DIJKSTRA_parser() {
-
     }
 
     bool isAllDone(bool doneIndexes [], uint32_t size) {
@@ -68,14 +61,13 @@ public:
                 if (!doneIndexes[friendNodeID]) {
                     friendsToVisit.emplace_back(friendNodeID);
                 }
-                    uint32_t pathCost = edgeTemp.getCost() +  costsToStartIndex[actualNode.getUID()];
 
-                    if (costsToStartIndex[friendNodeID] > pathCost) {
-                        costsToStartIndex[friendNodeID] = pathCost;
-                        previousNode[friendNodeID] = &nodes.getNode(actualIndex); // pointer to reference
-                    }
-//                }
+                uint32_t pathCost = edgeTemp.getCost() +  costsToStartIndex[actualNode.getUID()];
 
+                if (costsToStartIndex[friendNodeID] > pathCost) {
+                    costsToStartIndex[friendNodeID] = pathCost;
+                    previousNode[friendNodeID] = &nodes.getNode(actualIndex); // pointer to reference
+                }
             }
 
             while (true) {
@@ -86,30 +78,15 @@ public:
                 if (previousNode[friendToVisit] != nullptr && !doneIndexes[friendToVisit]) {
                     actualNode = nodes.items[friendToVisit];
                     actualIndex = actualNode.getIndex();
-//                    friendsToVisit.p
                     break;
                 }
             }
-
-//            for (uint32_t i = 0; i < nodes.size(); i++) {
-//                if (previousNode[i] != nullptr && !doneIndexes[i]) {
-//                    actualNode = nodes.items[i];
-//                    actualIndex = actualNode.getIndex();
-//                    break;
-//                }
-//            }
-
-
         }
-
-        int h = 0;
 
         for(unsigned int i = 0; i < nodes.size(); i++) {
             nodes.items[i].setLastPathCost(costsToStartIndex[i]);
+            nodes.items[i].setPreviousNode(previousNode[i]);
         }
-
-
     }
-
 };
 

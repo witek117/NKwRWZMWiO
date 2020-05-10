@@ -1,6 +1,5 @@
 #pragma once
 
-//#include "node.hpp"
 #include <algorithm>
 
 class Edge {

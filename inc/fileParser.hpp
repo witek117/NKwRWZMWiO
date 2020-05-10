@@ -4,6 +4,7 @@
 #include "plan.hpp"
 #include <iostream>
 #include <tuple>
+#include <dirent.h>
 
 std::vector<std::string> split(std::string data, const char c) {
     std::vector<std::string> returnData;
