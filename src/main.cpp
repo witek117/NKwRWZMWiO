@@ -9,6 +9,8 @@ int main() {
     FileParser fileParser(testName);
     Graph graph = fileParser.parse();
 
+    graph.DIJKSTRA(11);
+
     while (true) {
 
     }

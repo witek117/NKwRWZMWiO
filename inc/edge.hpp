@@ -24,6 +24,10 @@ public:
     int getStopIndex() {
         return stopIndex;
     }
+
+    int getCost() {
+        return cost;
+    }
 };
 
 class Edges {

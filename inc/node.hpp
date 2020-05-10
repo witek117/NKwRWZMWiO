@@ -13,11 +13,16 @@ class Node {
         return false;
     }
 
+    int lastpathCost = -1;
     int indexNumber;
+    uint32_t uID;
+public:
+    void setLastPathCost(int cost ) {
+        lastpathCost = cost;
+    }
     std::vector<Edge> edges;
 
-public:
-    Node(int indexNumber) : indexNumber(indexNumber) {
+    Node(int indexNumber, uint32_t uID) : indexNumber(indexNumber), uID(uID) {
 //        edges.clear();
     }
 
@@ -31,10 +36,14 @@ public:
     int getIndex() {
         return indexNumber;
     }
+
+    uint32_t getUID() {
+        return uID;
+    }
 };
 
 class Nodes {
-
+    uint32_t nodesCount = 0;
     int findNode(std::vector<Node>& nodes, int index) {
         for (unsigned int i = 0; i < nodes.size() ; i++) {
             if (nodes[i].getIndex() == index) {
@@ -45,18 +54,17 @@ class Nodes {
     }
 
 
-
-    std::vector<Node> items;
-
 public:
     void parseEdges(Edges edges) {
+        nodesCount = 0;
+
         for(auto itemEdge: edges.items) {
             int start =  itemEdge.getStartIndex();
             int stop = itemEdge.getStopIndex();
 
             int nodeIndex = findNode(items, start);
             if (nodeIndex == -1) {
-                items.emplace_back(start);
+                items.emplace_back(start, nodesCount++);
                 items[items.size() - 1].addEdges(itemEdge);
             } else {
                 items[nodeIndex].addEdges(itemEdge);
@@ -64,11 +72,26 @@ public:
 
             nodeIndex = findNode(items, stop);
             if (nodeIndex == -1) {
-                items.emplace_back(stop);
+                items.emplace_back(stop, nodesCount++);
                 items[items.size() - 1].addEdges(itemEdge);
             } else {
                 items[nodeIndex].addEdges(itemEdge);
             }
         }
     }
+
+    Node& getNode(int nodeIndex) {
+        for (auto& node : items) {
+            if (node.getIndex() == nodeIndex) {
+                return node;
+            }
+        }
+        return items.at(0);
+    }
+
+    uint32_t size() {
+        return nodesCount;
+    }
+
+    std::vector<Node> items;
 };
