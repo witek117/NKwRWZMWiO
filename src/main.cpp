@@ -7,9 +7,9 @@ static std::string testName = "test1.txt";
 
 int main() {
     FileParser fileParser(testName);
-    Graph graph = fileParser.parse();
+    auto[graph, plan] = fileParser.parse();
 
-    graph.DIJKSTRA(11);
+    graph.DIJKSTRA(plan.getDestination());
 
     while (true) {
 

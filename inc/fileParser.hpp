@@ -1,7 +1,9 @@
 #pragma once
 
 #include "graph.hpp"
+#include "plan.hpp"
 #include <iostream>
+#include <tuple>
 
 std::vector<std::string> split(std::string data, const char c) {
     std::vector<std::string> returnData;
@@ -63,8 +65,9 @@ public:
         readingState = FileLines::D_DESTINATION;
     }
 
-    Graph parse() {
+    std::tuple<Graph, Plan> parse() {
         Graph graph;
+        Plan plan;
 
         if (file.is_open()) {
             std::string line;
@@ -75,7 +78,7 @@ public:
                     if (found!=std::string::npos) {
                         line = line.substr(3);
                         int destination = std::stoi(line);
-                        graph.setDestination(destination);
+                        plan.setDestination(destination);
 
                         readingState = FileLines::S_COLLECTION;
                     } else {
@@ -89,7 +92,7 @@ public:
                         auto ddd = split(line, ' ');
 
                         for(auto d: ddd) {
-                            graph.addStartPoint(std::stoi(d));
+                            plan.addStartPoint(std::stoi(d));
                         }
                         readingState = FileLines::EDGE;
                     } else {
@@ -104,8 +107,7 @@ public:
             graph.parseNodes();
 
         }
-
-        return graph;
+        return std::make_tuple(graph, plan);
     }
 
     ~FileParser () {
