@@ -28,18 +28,6 @@ void printHelp() {
     std::cout << "9 12" << std::endl;
     std::cout << "11 12" << std::endl;
     std::cout << "11 10" << std::endl;
-
-
-    std::cout << "Is equivalent to graph:" << std::endl;
-
-//    std::cout << " 0 ----t=1---- 1 ----t=1---- 4" << std::endl;
-//    std::cout << " |             |" << std::endl;
-//    std::cout << " |             |" << std::endl;
-//    std::cout << "t=3           t=1" << std::endl;
-//    std::cout << " |             |" << std::endl;
-//    std::cout << " |             |" << std::endl;
-//    std::cout << " 3 ----t=2---- 2" << std::endl;
-//    std::cout << "With maximum time of 4." << std::endl;
 }
 
 

@@ -6,6 +6,13 @@
 #include <tuple>
 #include <dirent.h>
 
+std::string current_working_directory() {
+    char* cwd = _getcwd( 0, 0 ) ; // **** microsoft specific ****
+    std::string working_directory(cwd) ;
+    std::free(cwd) ;
+    return working_directory ;
+}
+
 std::vector<std::string> split(std::string data, const char c) {
     std::vector<std::string> returnData;
     std::string part = "";
@@ -23,13 +30,6 @@ std::vector<std::string> split(std::string data, const char c) {
 
 class FileParser {
     std::ifstream file;
-
-    std::string current_working_directory() {
-        char* cwd = _getcwd( 0, 0 ) ; // **** microsoft specific ****
-        std::string working_directory(cwd) ;
-        std::free(cwd) ;
-        return working_directory ;
-    }
 
     enum class FileLines {
         D_DESTINATION = 0,
@@ -114,6 +114,28 @@ public:
     ~FileParser () {
         file.close();
     }
+};
+
+class FileSaver {
 
 
+public:
+    static void save(std::string fileName, std::string data) {
+        std::ofstream file;
+
+        std::string pwd = current_working_directory();
+        std::string outFilePath;
+        for(unsigned int i = pwd.length()-1; i> 0; i--) {
+            if (pwd.at(i) == '\\') {
+                outFilePath = pwd.substr(0, i) + "\\outs";
+                break;
+            }
+        }
+        outFilePath += "\\" + fileName;
+
+        file.open(outFilePath);
+        file << data << std::endl;
+
+        file.close();
+    }
 };
