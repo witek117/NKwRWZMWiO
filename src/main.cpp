@@ -3,7 +3,7 @@
 #include "help.hpp"
 
 std::string printPath(Node* startNode) {
-    std::string out = "Best path ";
+    std::string out = "";
     if(startNode == nullptr) {
         return "";
     }
@@ -37,16 +37,41 @@ int main(int argc, char* argv[]) {
     auto startPoints = plan.getStartPoints();
 
     uint32_t fastestPath = std::numeric_limits<uint32_t>::max();
+
+    uint8_t possiblePathCount = 0;
+    Node* possiblePaths [10];
+
     Node* bestStartNode = nullptr;
     for (auto startPoint : startPoints) {
         Node& node = graph.nodes.getNode(startPoint);
         if (fastestPath > node.getLastPathCost()) {
             fastestPath = node.getLastPathCost();
             bestStartNode = &node;
+
+            for (int i = 0; i < possiblePathCount; ++i) {
+                possiblePaths[i] = nullptr;
+            }
+
+            possiblePathCount = 0;
+            possiblePaths[possiblePathCount++] = &node;
+
+        } else if (fastestPath == node.getLastPathCost()) {
+            possiblePaths[possiblePathCount++] = &node;
         }
     }
 
-    std::string outData = printPath(bestStartNode);
+    if (bestStartNode == nullptr) {
+        std::cout << "There is no way to help us" << std::endl;
+        return 0;
+    }
 
-    FileSaver::save("out_"+ fileName, "Best path: " + outData);
+    std::string outData = "";
+
+    std::cout << "Possible paths: \n\r";
+    for (int j = 0; j < possiblePathCount; ++j) {
+        outData += printPath(possiblePaths[j]) + "\r\n";
+        std::cout << std::endl;
+    }
+
+    FileSaver::save("out_"+ fileName, "Possible path: \n\r" + outData);
 }

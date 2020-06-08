@@ -25,7 +25,8 @@ The output should be:
 ```sh
 test1.txt
 Successfully opened file test1.txt
-Best path 4 7 10 11
+Possible paths:
+4 7 10 11
 ```
 
 **test1.txt** is a sample file
@@ -65,12 +66,14 @@ That file describes graph:<br/>
 $ cd cmake-build-debug
 $ .\TASK12.exe test2.txt
 ```
-Where **test2.txt** is your own file in **tests** directory.
-And the output should be like:
+Where **test2.txt** is your own file in **tests** directory.<br/>
+And the output could be like:
 ```sh
 test2.txt
 Successfully opened file test2.txt
-Best path 3 6 8 10 12
+Possible paths:
+3 6 8 10 12
+4 6 8 10 12
 ```
 
 ### Input data files should be in directory **tests**

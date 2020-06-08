@@ -1,1 +1,4 @@
-Best path: Best path 1 5 8 11 
+Possible path: 
+1 5 8 11 
+2 5 8 11 
+
