@@ -57,7 +57,7 @@ S= 1 2 3 4
 11 12
 11 10
 ```
-That file describes graph:
+That file describes graph:<br/>
 [![N|Solid](https://raw.githubusercontent.com/witek117/NKwRWZMWiO/master/tests/test1.jpg)](https://raw.githubusercontent.com/witek117/NKwRWZMWiO/master/tests/test1.jpg)
 
 ### Run application with your own file:
